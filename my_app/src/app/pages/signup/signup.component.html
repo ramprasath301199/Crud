@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <form (ngSubmit)="onSubmit()" [formGroup]="myform">
+        <div class="row">
+          <div class="header">
+            SIGNUP
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Name</label>
+              <input type="text" class="form-control" name="" id="" aria-describedby="helpId" formControlName="firstname" placeholder="enter name">
+              <small id="helpId" *ngIf="myform.value.firstname.trim().length != 0 && myform.value.firstname.trim().length < 3  && submit" class="form-text text-danger">! Name must be above 3 letters</small>
+              <small id="helpId" *ngIf="(myform.get('firstname').hasError('required') || myform.value.firstname.trim().length == 0)&& submit" class="form-text text-danger">! field is required</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Email</label>
+              <input type="email" class="form-control" name="" id="" formControlName="email" aria-describedby="emailHelpId"
+                placeholder="abc@mail.com">
+                <small id="helpId" *ngIf="myform.value.email.trim().length != 0 && myform.get('email').hasError('email') && submit" class="form-text text-danger">! Invalid Email</small>
+                <small id="helpId" *ngIf="(myform.get('email').hasError('required') || myform.value.email.trim().length == 0)&& submit" class="form-text text-danger">! field is required</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Password</label>
+              <input type="password" class="form-control" name="" id="" formControlName="password" aria-describedby="helpId"
+                placeholder="enter Password">
+                <small id="helpId" *ngIf="myform.value.password.trim().length != 0 && myform.value.password.trim().length < 4  && submit" class="form-text text-danger">! Password must be above 4 letters</small>
+                <small id="helpId" *ngIf="(myform.get('password').hasError('required') || myform.value.password.trim().length == 0 )&& submit" class="form-text text-danger">! field is required</small>
+              <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Mobile</label>
+              <input type="text" class="form-control" name="" id="" formControlName="mobile" aria-describedby="helpId"  placeholder="">
+              <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+              <small id="helpId" *ngIf="length && submit" class="form-text text-danger">! Mobile must be 10 Numbers</small>
+              <small id="helpId" *ngIf="(myform.get('mobile').hasError('required') || myform.value.mobile.trim().length == 0) && submit" class="form-text text-danger">! field is required</small>
+              <small id="helpId" *ngIf="pattern && submit && myform.value.mobile.trim().length == 0" class="form-text text-danger">! Invalid Mobile</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Address</label>
+              <textarea class="form-control" name="" id="" rows="2" formControlName="address"></textarea>
+              <small id="helpId" *ngIf="myform.value.address.trim().length != 0 && myform.value.address.trim().length < 4  && submit" class="form-text text-danger">! address must be above 4 letters</small>
+              <small id="helpId" *ngIf="(myform.get('address').hasError('required') || myform.value.address.trim().length == 0) && submit" class="form-text text-danger">! field is required</small>
+            </div>
+            <div class="mb-3">
+              <label for="" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" name="" id="" formControlName="confirm" placeholder="enter confirm password">
+              <small id="helpId" *ngIf=" myform.value.confirm.trim().length != 0 &&  myform.value.confirm.trim().length < 3 && submit" class="form-text text-danger">! confirm password must be above 3 letters</small>
+              <small id="helpId" *ngIf="(myform.get('confirm').hasError('required') || myform.value.confirm.trim().length == 0)&& submit" class="form-text text-danger">! field is required</small>
+              <small id="helpId" *ngIf="!myform.get('confirm').hasError('required') && myform.value.confirm.trim().length >= 3 && myform.value.password != myform.value.confirm && submit" class="form-text text-danger">! Please Enter same password</small>
+            </div>
+          </div>
+        </div>
+        <div class="mt-2">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="mt-3 d-flex justify-content-center">
+          <small id="helpId" class="form-text text-light">Already Have a Account Please Go <a routerLink="/login"
+              routerLinkActive="router-link-active" class="text-info"
+              style="text-decoration: none;"><b>Login</b></a></small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

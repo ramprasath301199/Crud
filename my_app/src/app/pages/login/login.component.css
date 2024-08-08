@@ -1,0 +1,29 @@
+
+.container-fluid{
+  /* background-color: #6d7a74; */
+  background: rgb(8 8 9 / 49%);
+  /* opacity: 1; */
+  width: 500px;
+  min-height: 70vh;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* /align-items: center; */
+  margin-top: 10%;
+  padding-top: 60px;
+  border-radius: 10px;
+  position: relative;
+  color: chocolate;
+  font-weight: bolder;
+}
+.mt-2{
+  display: flex;
+  justify-content: center;
+}
+.header{
+  font-size: larger;
+  /* color: black; */
+  font-weight: bolder;
+  text-align: center;
+  position: relative;
+  margin-bottom: 20px;
+}

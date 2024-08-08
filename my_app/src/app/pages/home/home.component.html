@@ -1,0 +1,127 @@
+<div class="container-fluid" style="padding: 0;">
+  <!-- Nav tabs -->
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+          <!-- <li class="nav-item">
+          <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+        </li> -->
+          <li class="nav-item">
+            <h4 class="nav-link text-danger" style="font-weight: bolder;font-size: larger;">HOME PAGE</h4>
+          </li>
+          <!-- <li class="nav-item">
+          <h4 class="nav-link"></h4>
+        </li> -->
+          <li class="nav-item-right  dropdown" style="position: absolute;
+        right: 80px;">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">{{!user ? "No User" : user | uppercase}}</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+          </li>
+        </ul>
+        <!-- <form class="d-flex my-2 my-lg-0">
+        <input class="form-control me-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
+      </div>
+    </div>
+  </nav>
+  <!-- table -->
+  <div class="container-fluid mt-5">
+    <h4 class="heading text-center mb-3">Users Data</h4>
+    <a class="btn btn-sm btn-success mb-3" data-bs-toggle="modal" data-bs-target="#modalId">Add Details</a>
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-bordered text-center">
+          <thead class="bg-dark text-light">
+            <tr>
+              <th scope="col">S.no</th>
+              <th scope="col">Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Address</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr *ngFor="let data of datas ; index as i">
+            <td>{{i+1}}</td>
+            <td>{{data.name | uppercase}}</td>
+            <td>{{data.LastName | uppercase}}</td>
+            <td>{{data.Mobile}}</td>
+            <td>{{data.Address | uppercase}}</td>
+            <td><a class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalId" (click)="getdet(data.Id)">Update</a> &nbsp;&nbsp;<a class="btn btn-sm btn-danger" (click)="delete(data.Id)">Delete</a></td>
+           </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Modal trigger button -->
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm)">
+          <div class="mb-3" >
+            <label for="" class="form-label">Name</label>
+            <input type="text"
+              class="form-control" formControlName="name" name="" id="name" aria-describedby="helpId" placeholder="enter name">
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+            <small id="helpId" *ngIf="profileForm.get('name').hasError('required') && profileForm.get('name').touched" class="form-text text-danger">! field is required</small>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label">Last Name</label>
+            <input type="text"
+              class="form-control" name="" id="" formControlName="LastName" aria-describedby="helpId" placeholder="enter lastname">
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+            <small id="helpId" *ngIf="profileForm.get('LastName').hasError('required') && profileForm.get('LastName').touched" class="form-text text-danger">! field is required</small>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label">Mobile</label>
+            <input type="number"
+              class="form-control" name="" id="" formControlName="Mobile"  aria-describedby="helpId" placeholder="enter mobile">
+            <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+            <small id="helpId" *ngIf="profileForm.get('Mobile').hasError('required') && profileForm.get('Mobile').touched" class="form-text text-danger">! field is required</small>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label">Address</label>
+            <textarea class="form-control" name="" id="" formControlName="Address" rows="3" placeholder="enter address"></textarea>
+            <small id="helpId" *ngIf="profileForm.get('Address').hasError('required') && profileForm.get('Address').touched" class="form-text text-danger">! field is required</small>
+          </div>
+          <!-- <button class="btn btn-primary" type="submit" >
+            Submit
+          </button> -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" #closeModal data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+  //const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+
+</script>
